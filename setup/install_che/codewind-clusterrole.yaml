@@ -56,10 +56,6 @@ rules:
   resources: ["images"]
   verbs: ["get", "list", "create", "watch"]
 
-- apiGroups: ["extensions"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "create", "delete", "watch"]
-
 - apiGroups: ["apps", "extensions"]
   resources: ["deployments"]
   verbs: ["watch", "get", "list", "create", "update", "delete"]

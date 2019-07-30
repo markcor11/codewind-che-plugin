@@ -108,3 +108,11 @@ function setCodewindOwner() {
     setTemplateValue $DEPLOY_DIR/codewind.yaml OWNER_REFERENCE_NAME_PLACEHOLDER $OWNER_REFERENCE_NAME
     setTemplateValue $DEPLOY_DIR/codewind.yaml OWNER_REFERENCE_UID_PLACEHOLDER $OWNER_REFERENCE_UID
 }
+
+function setCodewindIngress() {
+    # Get the CHE_API url and extract the hostname component
+    CHE_INGRESS_HOST=$(echo $CHE_API | sed -e 's#http[s]*://##') # remove protocol
+    CHE_INGRESS_HOST=$(echo $CHE_INGRESS_HOST | sed -e 's#/.*##') # remove path
+
+    setTemplateValue $DEPLOY_DIR/codewind.yaml CHE_INGRESS_HOST_PLACEHOLDER $CHE_INGRESS_HOST
+}

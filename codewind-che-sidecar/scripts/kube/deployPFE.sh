@@ -36,8 +36,10 @@ setTemplateValue $DEPLOY_DIR/codewind.yaml KUBE_NAMESPACE_PLACEHOLDER $NAMESPACE
 # Set the owner the Codewind deployment and service
 setCodewindOwner
 
-# Set the ingress for Codewind
-setCodewindIngress
+# Get the CHE_API url and extract the hostname component
+CHE_INGRESS_HOST=$(echo $CHE_API | sed -e 's#http[s]*://##') # remove protocol
+CHE_INGRESS_HOST=$(echo $CHE_INGRESS_HOST | sed -e 's#/.*##') # remove path
+sed -i "s/CHE_INGRESS_HOST_PLACEHOLDER/$CHE_INGRESS_HOST/g" /scripts/kube/codewind_template.yaml 
 
 # Check if we're on IBM Cloud Private and if so, apply the ibm-privileged-psp
 kubectl get images.icp.ibm.com
